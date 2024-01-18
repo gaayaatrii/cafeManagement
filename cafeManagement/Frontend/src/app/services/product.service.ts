@@ -1,0 +1,51 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ProductService {
+
+  url = environment.apiUrl;
+
+  constructor(private httpClient: HttpClient) { }
+
+  add(data: any) {
+    return this.httpClient.post(this.url + "/product/add", data, {
+      headers: new HttpHeaders().set('containt-type', 'application/Json')
+    })
+  }
+
+  update(data: any) {
+    return this.httpClient.post(this.url + "/product/update", data, {
+      headers: new HttpHeaders().set('containt-type', 'application/Json')
+    })
+  }
+
+  getProducts() {
+    return this.httpClient.get(this.url + "/product/get")
+  }
+
+  updateStatus(data: any) {
+    return this.httpClient.post(this.url + "/product/updateStatus", data, {
+      headers: new HttpHeaders().set('containt-type', 'application/Json')
+    })
+  }
+
+  delete(id: any) {
+    return this.httpClient.post(this.url + "/product/delete/" + id, {
+      headers: new HttpHeaders().set('containt-type', 'application/Json')
+    })
+  }
+
+  getProductsByCategory(id: any) {
+    return this.httpClient.get(this.url + "/product/getByCatgory/" + id)
+  }
+
+  getById(id: any) {
+    return this.httpClient.get(this.url + "/product/getById/" + id)
+  }
+
+
+}
